@@ -42,14 +42,25 @@ namespace FibonacciShell
         }
 
         /// <summary>
+        /// Method to print a list of numbers. Would work for strings too but not for objects
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="printThis"></param>
+        /// <param name="separatorType"></param>
+        private static void PrettyPrintNumber<T>(List<T> printThis, SeparatorType separatorType = SeparatorType.TwoSpaces)
+        {
+            printThis.ForEach(i => Console.Write("{0}{1}", i, GetSeparator(separatorType)));
+            Console.Write('\n');
+        }
+
+        /// <summary>
         /// Pretty prints a list of integers
         /// </summary>
         /// <param name="printThis">List to print</param>
         /// <param name="separatorType">Separator character to use</param>
         public static void PrettyPrint(List<int> printThis, SeparatorType separatorType = SeparatorType.TwoSpaces)
         {
-            printThis.ForEach(i => Console.Write("{0}{1}", i, GetSeparator(separatorType)));
-            Console.Write('\n');
+            PrettyPrintNumber<int>(printThis, separatorType);
         }
 
         /// <summary>
@@ -59,8 +70,7 @@ namespace FibonacciShell
         /// <param name="separatorType">Separator character to use</param>
         public static void PrettyPrint(List<double> printThis, SeparatorType separatorType = SeparatorType.TwoSpaces)
         {
-            printThis.ForEach(i => Console.Write("{0}{1}", i, GetSeparator(separatorType)));
-            Console.Write('\n');
+            PrettyPrintNumber<double>(printThis, separatorType);
         }
 
         /// <summary>
