@@ -5,7 +5,7 @@ using System.Text;
 namespace FibonacciShell
 {
     /// <summary>
-    /// Nth degree Nacci function. Calculates series to length limit with degree degree
+    /// Nth degree Binet's formula. Calculates series to length limit with degree degree
     /// Fibonacci series has degree of 2 meaning it calculates the previous 2 values together for current number
     /// </summary>
     class Nthnacci
@@ -34,15 +34,15 @@ namespace FibonacciShell
         {
             for(var i = 0; i < Limit; i++)
             {
-                if(i < NthDegree-1)
+                if(i < NthDegree-1) //The first numbers in the series before the degree level are 0:s. 
                 {
                     Series.Add(0);
                 }
                 else if(i == NthDegree-1)
                 {
-                    Series.Add(1);
+                    Series.Add(1); //The number just before the degree level is 1
                 }
-                else
+                else //After that, calculate the last n numbers in the series together
                 {
                     int number = 0;
                     for(var j = i-1; j >= (i - NthDegree); j--)
@@ -53,9 +53,5 @@ namespace FibonacciShell
                 }
             }
         }
-
-
-
-
     }
 }

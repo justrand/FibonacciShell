@@ -9,17 +9,64 @@ namespace FibonacciShell
     /// </summary>
     static class UI
     {
-        public static void PrettyPrint(List<int> printThis)
+        /// <summary>
+        /// Separator type for pretty printing list
+        /// </summary>
+        public enum SeparatorType
         {
-            printThis.ForEach(i => Console.Write("{0}  ", i));
+            Space = 1,
+            TwoSpaces,
+            LineBreak,
+            Tab
+        }
+
+        /// <summary>
+        /// Private handler for getting a string that matches the separator
+        /// </summary>
+        /// <param name="separatorType">Separator enumeration</param>
+        /// <returns></returns>
+        private static string GetSeparator(SeparatorType separatorType)
+        {
+            switch(separatorType)
+            {
+                case SeparatorType.Space:
+                    return new string(" ");
+                case SeparatorType.TwoSpaces:
+                    return new string("  ");
+                case SeparatorType.LineBreak:
+                    return new string("\n");
+                case SeparatorType.Tab:
+                    return new string("\t");
+                default: return new string("  ");
+            }
+        }
+
+        /// <summary>
+        /// Pretty prints a list of integers
+        /// </summary>
+        /// <param name="printThis">List to print</param>
+        /// <param name="separatorType">Separator character to use</param>
+        public static void PrettyPrint(List<int> printThis, SeparatorType separatorType = SeparatorType.TwoSpaces)
+        {
+            printThis.ForEach(i => Console.Write("{0}{1}", i, GetSeparator(separatorType)));
             Console.Write('\n');
         }
 
-        public static void PrettyPrint(List<double> printThis)
+        /// <summary>
+        /// Pretty prints a list of doubles
+        /// </summary>
+        /// <param name="printThis">List to print</param>
+        /// <param name="separatorType">Separator character to use</param>
+        public static void PrettyPrint(List<double> printThis, SeparatorType separatorType = SeparatorType.TwoSpaces)
         {
-            printThis.ForEach(i => Console.Write("{0}\n", i));
+            printThis.ForEach(i => Console.Write("{0}{1}", i, GetSeparator(separatorType)));
             Console.Write('\n');
         }
+
+        /// <summary>
+        /// Prints a title element with linebreaks
+        /// </summary>
+        /// <param name="title">Title</param>
         public static void PrintTitle(string title)
         {
             Console.Write("\n=== " + title+" ===\n");
@@ -36,7 +83,7 @@ namespace FibonacciShell
             UI.PrintTitle("Golden Ratio with formula");
             Console.WriteLine((1 + Math.Sqrt(5)) / 2);
             UI.PrintTitle("Golden Ratio from series");
-            UI.PrettyPrint(fib.GetGoldenRatio());
+            UI.PrettyPrint(fib.GetGoldenRatio(), UI.SeparatorType.Tab);
 
             Nthnacci nth = new Nthnacci(20, 3);
             UI.PrintTitle("Tribonacci Series");
